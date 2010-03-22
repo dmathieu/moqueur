@@ -11,7 +11,10 @@
 		var args = arguments[0];
 		for(i in $._mocked) {
 			if (args.url == $._mocked[i].url)
-				return args.success($._mocked[i].content);
+				if (args.success != undefined)
+					return args.success($._mocked[i].content);
+				else
+					return $._mocked[i].content;
 		};
 		
 		return $._dup_ajax.apply($, arguments);
