@@ -1,14 +1,17 @@
 (function ($) {
 	$._dup_ajax = $.ajax;
 	$._mocked = new Array();
+	$.counter = new Array();
 	
 	
 	$.mockAjax = function(params) {
 		$._mocked.push(params);
 	}
 	
-	$.ajax = function() {
+	$.ajax = function() {		
 		var args = arguments[0];
+		
+		$.counter.push({url: args.url})
 		for(i in $._mocked) {
 			if (args.url == $._mocked[i].url)
 				if (args.success != undefined)
