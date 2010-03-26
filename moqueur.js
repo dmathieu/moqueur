@@ -12,7 +12,7 @@
 		var args = arguments[0];
 		
 		$.counter.push({url: args.url})
-		for(i in $._mocked) {
+		for(i=0; i < $._mocked.length; i++) {
 			if (
 				($._mocked[i].url.constructor == String && args.url == $._mocked[i].url) ||
 				($._mocked[i].url.constructor == RegExp && args.url.search($._mocked[i].url) > -1)
