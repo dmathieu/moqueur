@@ -13,7 +13,10 @@
 		
 		$.counter.push({url: args.url})
 		for(i in $._mocked) {
-			if (args.url == $._mocked[i].url)
+			if (
+				($._mocked[i].url.constructor == String && args.url == $._mocked[i].url) ||
+				($._mocked[i].url.constructor == RegExp && args.url.search($._mocked[i].url) > -1)
+			)
 				if (args.success != undefined)
 					return args.success($._mocked[i].content);
 				else
