@@ -23,4 +23,10 @@ describe 'Main specs' do
       success: function() { return 'Executed Success method with regex'; }
     })").should eql('Executed Success method with regex')
   end
+  
+  it 'should give the param in the content when regex' do
+    @page.execute_js("jQuery.ajax({
+      url: '/regex/1234'
+    })").should eql('Request with regex. Param: 1234')
+  end
 end

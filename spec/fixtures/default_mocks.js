@@ -5,5 +5,5 @@ jQuery.mockAjax({
 
 jQuery.mockAjax({
 	url: new RegExp('^/regex/([0-9]+)$'),
-	content: "Request with regex."
+	content: "Request with regex. Param: $1"
 });
