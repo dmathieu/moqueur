@@ -11,7 +11,6 @@
 	$.ajax = function() {		
 		var args = arguments[0];
 		
-		$.counter.push({url: args.url})
 		for(i=0; i < $._mocked.length; i++) {
 			if (
 				($._mocked[i].url.constructor == String && args.url == $._mocked[i].url) ||
@@ -19,6 +18,7 @@
 			) {
 	  		var content = $._mockAjax.parse_content($._mocked[i].url, args.url, $._mocked[i].content);
 				
+				$.counter.push({url: args.url, mocked: true})
 				if (args.success != undefined) 
 					return args.success(content);
 				else 
@@ -26,6 +26,7 @@
 			}
 		};
 		
+		$.counter.push({url: args.url, mocked: false})
 		return $._dup_ajax.apply($, arguments);
 	},
 	
