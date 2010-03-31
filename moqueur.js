@@ -13,8 +13,9 @@
 		
 		for(i=0; i < $._mocked.length; i++) {
 			if (
-				($._mocked[i].url.constructor == String && args.url == $._mocked[i].url) ||
-				($._mocked[i].url.constructor == RegExp && args.url.search($._mocked[i].url) > -1)
+				(($._mocked[i].url.constructor == String && args.url == $._mocked[i].url) ||
+				($._mocked[i].url.constructor == RegExp && args.url.search($._mocked[i].url) > -1))
+				&& ($._mocked[i].type == undefined || $._mocked[i].type.toLowerCase() == args.type.toLowerCase())
 			) {
 	  		var content = $._mockAjax.parse_content($._mocked[i].url, args.url, $._mocked[i].content);
 				

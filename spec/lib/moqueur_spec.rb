@@ -31,4 +31,35 @@ describe 'Main specs' do
       })").should eql('Request with regex. Param: 1234')
     end
   end
+  
+  describe 'with method specified' do
+    it 'should mock a get request' do
+      @page.execute_js("jQuery.ajax({
+        url: '/get_request',
+        type: 'GET'
+      })").should eql('Standard request available only in GET')
+    end
+    
+    it 'should also take a type lower cased' do
+      @page.execute_js("jQuery.ajax({
+        url: '/get_request',
+        type: 'get'
+      })").should eql('Standard request available only in GET')
+    end
+    
+    it 'should not mock it in post' do
+      @page.execute_js("jQuery.ajax({
+        url: '/get_request',
+        type: 'POST'
+      })").should_not eql('Standard request available only in GET')
+    end
+    
+    it 'should mock by default whatever the type is' do
+      @page.execute_js("jQuery.ajax({
+      url: '/test',
+      type: 'POST',
+      success: function() { return 'Executed Success method'; }
+    })").should eql('Executed Success method')
+    end
+  end
 end
