@@ -1,11 +1,10 @@
 #
 # The rspec tasks
 #
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 task :default=> :spec
- 
+
 desc "Run all specs"
-Spec::Rake::SpecTask.new('spec') do |t|
-  t.spec_files = FileList['spec/**/*.rb']
-  t.spec_opts = ['-cfs']
+RSpec::Core::RakeTask.new('spec') do |t|
+  t.pattern = "./spec/**/*_spec.rb"
 end
